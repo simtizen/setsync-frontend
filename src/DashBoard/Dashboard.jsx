@@ -157,7 +157,7 @@ const Dashboard = ({userId, usrname, groupName, groupId, belongsToGroup, role, h
                                                 Edit Setlist
                                             </button>
                                             <button className="theme-btn danger" onClick={() => handleDelete(setlist._id, "upcoming")}>
-                                                Delete Setlist
+                                                Delete
                                             </button>
                                         </div>
                                     )}
