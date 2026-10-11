@@ -1,0 +1,94 @@
+/* Onboard.css */
+
+.onboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    padding: 20px;
+}
+
+.onboard-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 30px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.onboard-title {
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.onboard-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.onboard-input {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.onboard-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.onboard-input:focus {
+    border-color: var(--accent);
+}
+
+.onboard-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    margin-top: 5px;
+}
+
+.onboard-btn:hover {
+    opacity: 0.9;
+}
+
+.onboard-back {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    display: inline-block;
+}
+
+.onboard-back:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.onboard-error {
+    text-align: center;
+    color: var(--danger);
+    font-size: 1.1rem;
+    margin-top: 50px;
+}

@@ -1,0 +1,87 @@
+/* Signin.css */
+
+.signin-container {
+    max-width: 400px;
+    margin: 80px auto 50px auto;
+    padding: 40px 30px;
+    text-align: center;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.signin-heading {
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.signin-message {
+    color: var(--danger);
+    background-color: rgba(239, 68, 68, 0.1);
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.signin-input {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.signin-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.signin-input:focus {
+    border-color: var(--accent);
+}
+
+.signin-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    margin-top: 5px;
+}
+
+.signin-btn:hover {
+    opacity: 0.9;
+}
+
+.signin-switch {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.signin-switch:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}

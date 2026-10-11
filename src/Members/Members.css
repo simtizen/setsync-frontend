@@ -1,0 +1,116 @@
+/* Members.css */
+
+.members-loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-primary);
+}
+
+.members-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.members-header {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 0;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+}
+
+.members-empty {
+    color: var(--text-secondary);
+}
+
+.members-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.member-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--bg-main);
+}
+
+.member-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.member-name {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.member-self-tag {
+    color: var(--accent);
+    font-size: 0.85rem;
+    margin-left: 6px;
+    font-weight: normal;
+}
+
+.member-role-badge {
+    font-size: 0.85rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: #ffffff;
+    width: fit-content;
+    font-weight: 500;
+}
+
+.admin-badge {
+    background-color: #28a745;
+}
+
+.standard-badge {
+    background-color: #6c757d;
+}
+
+.member-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.member-btn {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: opacity 0.2s ease;
+}
+
+.member-btn:hover {
+    opacity: 0.85;
+}
+
+.member-btn-admin {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+.member-btn-reset {
+    background-color: #ffc107;
+    color: #212529;
+    font-weight: bold;
+}
+
+.member-btn-remove {
+    background-color: var(--danger);
+    color: #ffffff;
+}

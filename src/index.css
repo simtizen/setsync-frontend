@@ -1,0 +1,67 @@
+/* 1. Stage Slate (Light) - DEFAULT */
+:root {
+  --bg-main: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --accent: #2563EB;
+  --border: #E2E8F0;
+}
+
+/* 2. Stage Slate (Dark) */
+[data-theme="slate-dark"] {
+  --bg-main: #0F172A;
+  --bg-card: #1E293B;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --accent: #3B82F6;
+  --border: #334155;
+}
+
+/* 3. Obsidian (Light) */
+[data-theme="obsidian-light"] {
+  --bg-main: #FAFAF9;
+  --bg-card: #FFFFFF;
+  --text-primary: #1C1917;
+  --text-secondary: #78716C;
+  --accent: #D97706;
+  --border: #E7E5E4;
+}
+
+/* 4. Obsidian (Dark) */
+[data-theme="obsidian-dark"] {
+  --bg-main: #000000;
+  --bg-card: #121212;
+  --text-primary: #FFFFFF;
+  --text-secondary: #A8A29E;
+  --accent: #F59E0B;
+  --border: #262626;
+}
+
+/* 5. Velvet Indigo (Light) */
+[data-theme="indigo-light"] {
+  --bg-main: #F3F4F6;
+  --bg-card: #FFFFFF;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --accent: #7C3AED;
+  --border: #E5E7EB;
+}
+
+/* 6. Velvet Indigo (Dark) */
+[data-theme="indigo-dark"] {
+  --bg-main: #0B0F19;
+  --bg-card: #111827;
+  --text-primary: #F9FAFB;
+  --text-secondary: #9CA3AF;
+  --accent: #8B5CF6;
+  --border: #1F2937;
+}
+
+/* Apply variables globally */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth fade when switching */
+  margin: 0
+}

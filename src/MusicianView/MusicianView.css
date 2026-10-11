@@ -1,0 +1,110 @@
+.musician-loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-primary);
+}
+
+.musician-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.musician-header {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+}
+
+.musician-subtitle {
+    color: var(--text-secondary);
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+.musician-empty {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 30px;
+}
+
+.setlist-live-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.setlist-live-title {
+    margin: 0 0 8px 0;
+    color: var(--text-primary);
+    font-size: 1.3rem;
+}
+
+.setlist-live-meta {
+    margin: 0 0 20px 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.setlist-songs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.setlist-song-item {
+    background-color: var(--bg-main);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+}
+
+.setlist-song-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.setlist-song-title {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.setlist-song-badges {
+    display: flex;
+    gap: 6px;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.badge-key {
+    background-color: var(--accent);
+}
+
+.badge-bpm {
+    background-color: var(--text-secondary);
+}
+
+.setlist-song-notes {
+    margin: 10px 0 0 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 6px;
+}

@@ -1,0 +1,155 @@
+/* SetlistForm.css */
+
+.setlist-form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.setlist-form-title {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.setlist-subtitle {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.setlist-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.setlist-input {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.setlist-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.setlist-input:focus {
+    border-color: var(--accent);
+}
+
+.setlist-divider {
+    margin: 25px 0;
+    border: none;
+    border-top: 1px solid var(--border);
+}
+
+.song-card {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.song-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.song-card-title {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.song-row {
+    display: flex;
+    gap: 12px;
+}
+
+.setlist-btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.setlist-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.setlist-btn-primary {
+    flex: 1;
+    background-color: var(--accent);
+    color: #ffffff;
+}
+.setlist-btn-primary:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+.setlist-btn-secondary {
+    flex: 1;
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+}
+.setlist-btn-secondary:hover {
+    background-color: var(--bg-main);
+    border-color: var(--text-secondary);
+}
+
+.setlist-btn-outline {
+    width: 100%;
+    background-color: transparent;
+    color: var(--accent);
+    border: 1px dashed var(--accent);
+    padding: 12px;
+    margin-top: 5px;
+}
+.setlist-btn-outline:hover {
+    background-color: var(--bg-main);
+}
+
+.setlist-btn-danger {
+    padding: 6px 12px;
+    background-color: transparent;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+.setlist-btn-danger:hover {
+    background-color: var(--danger);
+    color: #ffffff;
+}
+
+.setlist-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
