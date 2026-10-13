@@ -13,7 +13,7 @@ const Members = ({ userId, role, url }) => {
     const fetchMembers = async () => {
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.get(`${url}/members`, {
+            const response = await axios.get(`${url}/group/members`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             setMembers(response.data);
