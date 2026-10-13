@@ -117,7 +117,6 @@ const App = () => {
         <Nav
           currentRoute={route}
           onRouteChange={setRoute}
-          role={role}
           handleLogout={handleLogout}
           usrname={usrname}
           theme={theme}

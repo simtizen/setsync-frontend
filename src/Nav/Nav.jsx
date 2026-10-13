@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Nav.css";
 
 const Nav = ({ currentRoute, onRouteChange, role, handleLogout, usrname, theme, setTheme, belongsToGroup }) => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const handleNavigate = (route) => {
+        onRouteChange(route);
+        setIsMenuOpen(false);
+    };
+
+    const handleLogoutClick = () => {
+        setIsMenuOpen(false);
+        handleLogout();
+    };
+
     return (
         <nav className="nav-container">
-            <h2 className="nav-brand" onClick={() => onRouteChange("home")}>Hello, {usrname}</h2>
-            
-            <div className="nav-actions">
+            <h2 className="nav-brand" onClick={() => handleNavigate("home")}>Hello, {usrname}</h2>
+
+            <button 
+                type="button"
+                className="nav-toggle" 
+                onClick={() => setIsMenuOpen((prev) => !prev)}
+                aria-label="Toggle navigation menu"
+                aria-expanded={isMenuOpen}
+            >
+                {isMenuOpen ? "✕" : "☰"}
+            </button>
+
+            <div className={`nav-actions ${isMenuOpen ? "open" : ""}`}>
                 <select 
                     value={theme} 
                     onChange={(e) => setTheme(e.target.value)}
@@ -19,24 +41,24 @@ const Nav = ({ currentRoute, onRouteChange, role, handleLogout, usrname, theme, 
                     <option value="indigo-light">Velvet Indigo (Light)</option>
                     <option value="indigo-dark">Velvet Indigo (Dark)</option>
                 </select>
-                
+
                 {belongsToGroup && (
                     <button 
-                        onClick={() => onRouteChange("musician-view")}
+                        onClick={() => handleNavigate("musician-view")}
                         className={`nav-btn ${currentRoute === "musician-view" ? "active" : ""}`}
                     >
                         Musician Hub
                     </button>
                 )}
                 <button 
-                    onClick={() => onRouteChange("members")}
+                    onClick={() => handleNavigate("members")}
                     className={`nav-btn ${currentRoute === "members" ? "active" : ""}`}
                 >
                     Team Members
                 </button>
 
                 <button 
-                    onClick={handleLogout}
+                    onClick={handleLogoutClick}
                     className="nav-btn-logout"
                 >
                     Logout
