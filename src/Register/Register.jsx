@@ -5,6 +5,7 @@ const Register = ({ registerUser, onRouteChange }) => {
     const [usrname, setUsrname] = useState('');
     const [password, setPassword] = useState('');
     const [isRegistering, setIsRegistering] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -15,7 +16,7 @@ const Register = ({ registerUser, onRouteChange }) => {
 
         try {
             await registerUser(usrname, password);
-        } catch (error) {
+        } finally {
             setIsRegistering(false);
         }
     };
@@ -32,13 +33,25 @@ const Register = ({ registerUser, onRouteChange }) => {
                     onChange={(e) => setUsrname(e.target.value)} 
                     className="register-input"
                 />
-                <input 
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="register-input"
-                />
+                
+                <div className="password-wrapper">
+                    <input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="register-input"
+                    />
+
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="show-password-btn"
+                    >
+                        {showPassword ? "Hide" : "Show"}
+                    </button>
+                </div>
+
                 <button
                     type="submit"
                     className="register-btn"

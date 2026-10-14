@@ -5,6 +5,7 @@ const Signin = ({ signinUser, onRouteChange }) => {
     const [usrname, setUsrname] = useState('');
     const [password, setPassword] = useState('');
     const [isLoggingIn, setIsLoggingIn] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -15,7 +16,7 @@ const Signin = ({ signinUser, onRouteChange }) => {
 
         try {
             await signinUser(usrname, password);
-        } catch (error) {
+        } finally {
             setIsLoggingIn(false);
         }
     };
@@ -32,13 +33,24 @@ const Signin = ({ signinUser, onRouteChange }) => {
                     onChange={e => setUsrname(e.target.value)}
                     className="signin-input"
                 />
-                <input 
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    className="signin-input"
-                />
+
+                <div className="password-wrapper">
+                    <input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="signin-input"
+                    />
+
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="show-password-btn"
+                    >
+                        {showPassword ? "Hide" : "Show"}
+                    </button>
+                </div>
                 
                 <button
                     type="submit"
