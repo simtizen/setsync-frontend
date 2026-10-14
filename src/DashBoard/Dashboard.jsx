@@ -86,6 +86,15 @@ const Dashboard = ({userId, usrname, groupName, groupId, belongsToGroup, role, h
         });
     };
 
+    const copyInviteCode = async () => {
+        try {
+            await navigator.clipboard.writeText(inviteCode);
+            alert("Invite code copied!");
+        } catch (error) {
+            alert("Failed to copy invite code.");
+        }
+    };
+
     return (
         <div className="Dashboard-container">
             {!belongsToGroup ? (
@@ -109,7 +118,19 @@ const Dashboard = ({userId, usrname, groupName, groupId, belongsToGroup, role, h
                                 </button>
                             ) : (
                                 <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "15px" }}>
-                                    <code style={{ fontSize: "1.2em", backgroundColor: "var(--bg-main)", color: "var(--accent)", padding: "5px 10px", borderRadius: "4px", border: "1px solid var(--border)" }}>
+                                    <code
+                                        onClick={copyInviteCode}
+                                        title="Click to copy invite code"
+                                        style={{
+                                            fontSize: "1.2em",
+                                            backgroundColor: "var(--bg-main)",
+                                            color: "var(--accent)",
+                                            padding: "5px 10px",
+                                            borderRadius: "4px",
+                                            border: "1px solid var(--border)",
+                                            cursor: "pointer"
+                                        }}
+                                    >
                                         {inviteCode}
                                     </code>
                                     <button className="theme-btn outline" onClick={() => setInviteCode(null)}>Hide</button>
