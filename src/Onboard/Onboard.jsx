@@ -5,9 +5,10 @@ import "./Onboard.css";
 const Onboard = ({route, onRouteChange, refreshProfile, url}) => {
     const [groupName, setGroupName] = useState('');
     const [inviteCode, setInviteCode] = useState('');
+    const [isjoining, setIsJoining] = useState(false);
+    const [iscreating, setIsCreating] = useState(false)
 
-    const createGroup = async (e) => {
-        e.preventDefault();
+    const createGroup = async () => {
         const token = localStorage.getItem('token')
         try {
             const response = await axios.post(`${url}/create-group`, {
@@ -26,8 +27,7 @@ const Onboard = ({route, onRouteChange, refreshProfile, url}) => {
         }
     }
 
-    const joinGroup = async (e) => {
-        e.preventDefault();
+    const joinGroup = async () => {
         const token = localStorage.getItem('token')
         try {
             const response = await axios.post(`${url}/join-group`, {
@@ -46,12 +46,42 @@ const Onboard = ({route, onRouteChange, refreshProfile, url}) => {
         }
     }
 
+    const handleJoin = async (e) => {
+        e.preventDefault();
+
+        if (isjoining) return;
+
+        setIsJoining(true);
+
+        try {
+            await joinGroup();
+        } finally {
+            setIsJoining(false);
+        }
+    };
+
+    const handleCreate = async (e) => {
+        e.preventDefault();
+
+        if (iscreating) return;
+
+        setIsCreating(true);
+
+        try {
+            await createGroup();
+        } finally {
+            setIsCreating(false);
+        }
+    };
+
+
+
     return (
         <div className="onboard-container">
             {route === 'create-group' ? (
                 <div className="onboard-card">
                     <h2 className="onboard-title">Create a New Group</h2>
-                    <form className="onboard-form" onSubmit={createGroup}>
+                    <form className="onboard-form" onSubmit={handleCreate}>
                         <input 
                             type="text" 
                             placeholder="Group Name"
@@ -59,14 +89,20 @@ const Onboard = ({route, onRouteChange, refreshProfile, url}) => {
                             onChange={(e) => setGroupName(e.target.value)}
                             className="onboard-input"
                         />
-                        <button type="submit" className="onboard-btn">Create Group</button>
+                        <button 
+                            type="submit" 
+                            className="onboard-btn"
+                            disabled={iscreating}
+                        >
+                           {iscreating ? "Creating Group...." : "Create Group"}
+                        </button>
                     </form>
                     <p onClick={() => onRouteChange("home")} className="onboard-back">Back</p>
                 </div>
             ) : route === 'join-group' ? (
                 <div className="onboard-card">
                     <h2 className="onboard-title">Join an Existing Group</h2>
-                    <form className="onboard-form" onSubmit={joinGroup}>
+                    <form className="onboard-form" onSubmit={handleJoin}>
                         <input 
                             type="text" 
                             placeholder="Invite Code"
@@ -74,7 +110,13 @@ const Onboard = ({route, onRouteChange, refreshProfile, url}) => {
                             onChange={(e) => setInviteCode(e.target.value)}
                             className="onboard-input"
                         />
-                        <button type="submit" className="onboard-btn">Join Group</button>
+                        <button 
+                            type="submit" 
+                            className="onboard-btn"
+                            disabled={isjoining}
+                        >
+                            {isjoining? "Joining ....." : "Join Group"}
+                        </button>
                     </form>
                     <p onClick={() => onRouteChange("home")} className="onboard-back">Back</p>
                 </div>
