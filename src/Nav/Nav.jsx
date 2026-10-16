@@ -44,10 +44,10 @@ const Nav = ({ currentRoute, onRouteChange, role, handleLogout, usrname, theme, 
 
                 {belongsToGroup && (
                     <button 
-                        onClick={() => handleNavigate("musician-view")}
-                        className={`nav-btn ${currentRoute === "musician-view" ? "active" : ""}`}
+                        onClick={() => handleNavigate("upcoming-setlists")}
+                        className={`nav-btn ${currentRoute === "upcoming-setlists" ? "active" : ""}`}
                     >
-                        Musician Hub
+                        Upcoming Setlists
                     </button>
                 )}
                 <button 

@@ -20,6 +20,8 @@ const App = () => {
   const [belongsToGroup, setBelongsToGroup] = useState('');
   const [role, setUserRole] = useState('');
   const [editingSetlist, setEditingSetlist] = useState(null);
+  const [selectedSetlistId, setSelectedSetlistId] = useState(null);
+  const [previousRoute, setPreviousRoute] = useState('home');
   const [theme, setTheme] = useState(localStorage.getItem("appTheme") || "slate-dark");
 
   useEffect(() => {
@@ -116,7 +118,12 @@ const App = () => {
       {route !== "Signin" && route !== "Register" && route !== "create-group" && route !== "join-group" && (
         <Nav
           currentRoute={route}
-          onRouteChange={setRoute}
+          onRouteChange={(newRoute) => {
+            if (newRoute === "upcoming-setlists") {
+              setSelectedSetlistId(null);
+            }
+            setRoute(newRoute);
+          }}
           handleLogout={handleLogout}
           usrname={usrname}
           theme={theme}
@@ -147,6 +154,11 @@ const App = () => {
           onRouteChange={setRoute}
           existingSetlist={editingSetlist}
           setEditingSetlist={setEditingSetlist}
+          onViewSetlist={(id) => {
+            setSelectedSetlistId(id);
+            setPreviousRoute('home');
+            setRoute('musician-view');
+          }}
         />
       ) : (route === "create-group" || route === "join-group") ? (
         <Onboard 
@@ -185,8 +197,26 @@ const App = () => {
               }
             }}
         />
+      ) : route === "upcoming-setlists" ? (
+        <MusicianHub 
+          url={API_URL}
+          setlistId={null}
+          onSelectSetlist={(id) => {
+            setSelectedSetlistId(id);
+            setPreviousRoute('upcoming-setlists');
+            setRoute('musician-view');
+          }}
+        />
       ) : route === "musician-view" ? (
-        <MusicianHub url={API_URL}/>
+        <MusicianHub 
+          url={API_URL}
+          setlistId={selectedSetlistId}
+          onSelectSetlist={(id) => setSelectedSetlistId(id)}
+          onBack={() => {
+            setSelectedSetlistId(null);
+            setRoute(previousRoute || 'home');
+          }}
+        />
       ) : route === "members" ? (
             <Members userId={userId} role={role} url={API_URL}/>
           ) : <div>Error Fetching Page</div>}

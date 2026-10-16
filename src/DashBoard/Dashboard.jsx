@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Dashboard.css"
 
-const Dashboard = ({userId, usrname, groupName, groupId, belongsToGroup, role, handleLogout, onRouteChange, setEditingSetlist, existingSetlist, url}) => {
+const Dashboard = ({userId, usrname, groupName, groupId, belongsToGroup, role, handleLogout, onRouteChange, setEditingSetlist, existingSetlist, url, onViewSetlist}) => {
     const [inviteCode, setInviteCode] = useState(null);
     const [isLoadingCode, setIsLoadingCode] = useState(false);
     const [upComingSetlists, setUpComingSetlists] = useState([]);
@@ -169,19 +169,27 @@ const Dashboard = ({userId, usrname, groupName, groupId, belongsToGroup, role, h
                                             </div>
                                         ))}
                                     </div>
-                                    {role === 'admin' && (
-                                        <div style={{ marginTop: "15px", display: "flex", gap: "10px" }}>
-                                            <button className="theme-btn" onClick={() => {
-                                                setEditingSetlist(setlist); 
-                                                onRouteChange('setlist-form'); 
-                                            }}>
-                                                Edit Setlist
-                                            </button>
-                                            <button className="theme-btn danger" onClick={() => handleDelete(setlist._id, "upcoming")}>
-                                                Delete
-                                            </button>
-                                        </div>
-                                    )}
+                                    <div style={{ marginTop: "15px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                                        <button 
+                                            className="theme-btn accent" 
+                                            onClick={() => onViewSetlist ? onViewSetlist(setlist._id) : onRouteChange('musician-view')}
+                                        >
+                                            View Setlist
+                                        </button>
+                                        {role === 'admin' && (
+                                            <>
+                                                <button className="theme-btn" onClick={() => {
+                                                    setEditingSetlist(setlist); 
+                                                    onRouteChange('setlist-form'); 
+                                                }}>
+                                                    Edit Setlist
+                                                </button>
+                                                <button className="theme-btn danger" onClick={() => handleDelete(setlist._id, "upcoming")}>
+                                                    Delete
+                                                </button>
+                                            </>
+                                        )}
+                                    </div>
                                 </div>
                             ))
                         )}
@@ -211,19 +219,27 @@ const Dashboard = ({userId, usrname, groupName, groupId, belongsToGroup, role, h
                                             </div>
                                         ))}
                                     </div>
-                                    {role === 'admin' && (
-                                        <div style={{ marginTop: "15px", display: "flex", gap: "10px" }}>
-                                            <button className="theme-btn" onClick={() => {
-                                                setEditingSetlist(setlist); 
-                                                onRouteChange('setlist-form'); 
-                                            }}>
-                                                Edit
-                                            </button>
-                                            <button className="theme-btn danger" onClick={() => handleDelete(setlist._id, "past")}>
-                                                Delete
-                                            </button>
-                                        </div>
-                                    )}
+                                    <div style={{ marginTop: "15px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                                        <button 
+                                            className="theme-btn accent" 
+                                            onClick={() => onViewSetlist ? onViewSetlist(setlist._id) : onRouteChange('musician-view')}
+                                        >
+                                            View Setlist
+                                        </button>
+                                        {role === 'admin' && (
+                                            <>
+                                                <button className="theme-btn" onClick={() => {
+                                                    setEditingSetlist(setlist); 
+                                                    onRouteChange('setlist-form'); 
+                                                }}>
+                                                    Edit
+                                                </button>
+                                                <button className="theme-btn danger" onClick={() => handleDelete(setlist._id, "past")}>
+                                                    Delete
+                                                </button>
+                                            </>
+                                        )}
+                                    </div>
                                 </div>
                             ))
                         )}
