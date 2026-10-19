@@ -23,7 +23,7 @@ const Register = ({ registerUser, onRouteChange }) => {
 
     return (
         <div className="register-container">
-            <h2 className="register-heading">Create SetSync Account</h2>
+            <h2 className="register-heading">Create a SetSync Account</h2>
 
             <form className="register-form" onSubmit={onSubmit}>
                 <input 
