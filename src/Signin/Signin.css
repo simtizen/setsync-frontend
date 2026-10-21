@@ -73,6 +73,11 @@
     opacity: 0.9;
 }
 
+.signin-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
 .signin-switch {
     color: var(--text-secondary);
     font-size: 0.9rem;

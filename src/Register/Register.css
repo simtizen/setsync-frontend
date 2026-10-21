@@ -64,6 +64,11 @@
     opacity: 0.9;
 }
 
+.register-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
 .register-switch {
     color: var(--text-secondary);
     font-size: 0.9rem;
