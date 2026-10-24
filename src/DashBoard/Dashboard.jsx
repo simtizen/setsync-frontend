@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Dashboard.css"
+import { usePopUp } from "../PopUp/PopUpContext";
 
-const Dashboard = ({userId, usrname, groupName, groupId, belongsToGroup, role, handleLogout, onRouteChange, setEditingSetlist, existingSetlist, url, onViewSetlist}) => {
+const Dashboard = ({groupName, groupId, belongsToGroup, role, onRouteChange, setEditingSetlist, url, onViewSetlist}) => {
+    const { showPopUp, showConfirm } = usePopUp();
     const [inviteCode, setInviteCode] = useState(null);
     const [isLoadingCode, setIsLoadingCode] = useState(false);
     const [upComingSetlists, setUpComingSetlists] = useState([]);
@@ -24,7 +26,7 @@ const Dashboard = ({userId, usrname, groupName, groupId, belongsToGroup, role, h
             setInviteCode(response.data.inviteCode);
         } catch (err) {
             const backendError = err.response?.data?.error || "Failed to fetch invite code";
-            alert(backendError);
+            showPopUp(backendError, "error");
         } finally {
             setIsLoadingCode(false);
         }
@@ -43,12 +45,17 @@ const Dashboard = ({userId, usrname, groupName, groupId, belongsToGroup, role, h
 
         } catch (err) {
             const backendError = err.response?.data?.error || "Error Getting Setlists";
-            alert(backendError);
+            showPopUp(backendError, "error");
         }
     };
 
     const handleDelete = async (id, state) => {
-        const confirmed = window.confirm("Are you sure you want to delete this setlist?");
+        const confirmed = await showConfirm({
+            title: "Delete Setlist",
+            message: "Are you sure you want to delete this setlist?",
+            confirmText: "Delete",
+            isDanger: true,
+        });
         if (!confirmed) return;
 
         try {
@@ -58,7 +65,7 @@ const Dashboard = ({userId, usrname, groupName, groupId, belongsToGroup, role, h
                 headers: { "Authorization": `Bearer ${token}` }
             });
 
-            alert(response.data.msg);
+            showPopUp(response.data.msg, "success");
 
             if (state === "upcoming") {
                 setUpComingSetlists(
@@ -75,7 +82,7 @@ const Dashboard = ({userId, usrname, groupName, groupId, belongsToGroup, role, h
         } catch (err) {
             const backendError = err.response?.data?.error || "Error Deleting Setlist";
             console.log(err);
-            alert(backendError);
+            showPopUp(backendError, "error");
         }
     };
 
@@ -89,9 +96,9 @@ const Dashboard = ({userId, usrname, groupName, groupId, belongsToGroup, role, h
     const copyInviteCode = async () => {
         try {
             await navigator.clipboard.writeText(inviteCode);
-            alert("Invite code copied!");
+            showPopUp("Invite code copied!", "success");
         } catch (error) {
-            alert("Failed to copy invite code.");
+            showPopUp("Failed to copy invite code.", "error");
         }
     };
 

@@ -1,0 +1,109 @@
+/* Toast Container - Desktop: Bottom-Right */
+.popup-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-width: 280px;
+  max-width: 420px;
+  padding: 0.875rem 1.25rem;
+  border-radius: 8px;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.25), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  animation: toastSlideUp 0.25s ease-out;
+  word-break: break-word;
+}
+
+.popup-body {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.popup-message {
+  font-size: 0.95rem;
+}
+
+/* Error Variant - Uses theme --danger variable */
+.popup-toast.popup-error {
+  border-color: var(--danger);
+  border-left: 5px solid var(--danger);
+}
+
+.popup-toast.popup-error .popup-message {
+  color: var(--danger);
+  font-weight: 500;
+}
+
+/* Success Variant - Uses theme --accent variable */
+.popup-toast.popup-success {
+  border-left: 5px solid var(--accent);
+}
+
+/* Info Variant */
+.popup-toast.popup-info {
+  border-left: 5px solid var(--border);
+}
+
+/* Close Button */
+.popup-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.popup-close-btn:hover {
+  color: var(--text-primary);
+}
+
+/* Desktop Slide-up Animation */
+@keyframes toastSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile: Bottom-Center Responsive */
+@media (max-width: 640px) {
+  .popup-toast {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 1rem;
+    width: calc(100% - 2rem);
+    max-width: calc(100% - 2rem);
+    animation: toastSlideUpMobile 0.25s ease-out;
+  }
+
+  @keyframes toastSlideUpMobile {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 16px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+}

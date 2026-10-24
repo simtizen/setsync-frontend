@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Onboard.css";
+import { usePopUp } from "../PopUp/PopUpContext";
 
 const Onboard = ({route, onRouteChange, refreshProfile, url}) => {
+    const { showPopUp } = usePopUp();
     const [groupName, setGroupName] = useState('');
     const [inviteCode, setInviteCode] = useState('');
     const [isjoining, setIsJoining] = useState(false);
@@ -18,12 +20,12 @@ const Onboard = ({route, onRouteChange, refreshProfile, url}) => {
                 headers: {'Authorization': `Bearer ${token}`}
             });
 
-            alert(response.data.msg);
+            showPopUp(response.data.msg, "success");
             await refreshProfile();
             onRouteChange("home");
         } catch (err) {
             const backendError = err.response?.data?.error || "Error Creating Group";
-            alert(backendError);
+            showPopUp(backendError, "error");
         }
     }
 
@@ -37,12 +39,12 @@ const Onboard = ({route, onRouteChange, refreshProfile, url}) => {
                 headers: {'Authorization': `Bearer ${token}`}
             });
 
-            alert(response.data.msg);
+            showPopUp(response.data.msg, "success");
             await refreshProfile();
             onRouteChange("home");
         } catch (err) {
             const backendError = err.response?.data?.error || "Error Joining Group";
-            alert(backendError);
+            showPopUp(backendError, "error");
         }
     }
 

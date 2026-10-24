@@ -9,9 +9,11 @@ import Onboard from "./Onboard/Onboard";
 import SetlistForm from "./SetlistForm/SetlistForm";
 import MusicianHub from "./MusicianView/MusicianView";
 import Members from "./Members/Members"; 
+import { usePopUp } from "./PopUp/PopUpContext";
 const API_URL = import.meta.env.VITE_API_URL;
 
 const App = () => {
+  const { showPopUp } = usePopUp();
   const [route, setRoute] = useState('Signin');
   const [usrname, setUsrname] = useState('');
   const [userId, setUserId] = useState('');
@@ -40,12 +42,12 @@ const App = () => {
         password: password
       });
 
-      alert(response.data.msg);
+      showPopUp(response.data.msg, "success");
       setRoute("Signin");
 
     } catch (err) {
       const backendError = err.response?.data?.error || "Registration failed";
-      alert(backendError);
+      showPopUp(backendError, "error");
     }
   }
 
@@ -97,14 +99,14 @@ const App = () => {
       });
 
       localStorage.setItem("token", response.data.token);
-      alert(response.data.msg);
+      showPopUp(response.data.msg, "success");
 
       await getUserProfile(); 
       setRoute("home");
 
     } catch (err) {
       const backendError = err.response?.data?.error || "Signin Failed";
-      alert(backendError);
+      showPopUp(backendError, "error");
     }
   }
 
@@ -147,12 +149,9 @@ const App = () => {
           handleLogout={handleLogout}
           groupName={groupName}
           groupId={groupId}
-          usrname={usrname}
-          userId={userId}
           belongsToGroup={belongsToGroup}
           role={role}
           onRouteChange={setRoute}
-          existingSetlist={editingSetlist}
           setEditingSetlist={setEditingSetlist}
           onViewSetlist={(id) => {
             setSelectedSetlistId(id);
@@ -179,13 +178,13 @@ const App = () => {
                       await axios.post(`${API_URL}/admin/setlists`, formData, {
                           headers: { "Authorization": `Bearer ${token}` }
                       });
-                      alert("Setlist Created Successfully!");
+                      showPopUp("Setlist Created Successfully!", "success");
                   }
                   if (editingSetlist) {
                       await axios.put(`${API_URL}/admin/setlists/${editingSetlist._id}`, formData, {
                         headers: { "Authorization": `Bearer ${token}` }
                       });
-                      alert("Setlist Updated Successfully!");
+                      showPopUp("Setlist Updated Successfully!", "success");
                   }
                   
                   setEditingSetlist(null);
@@ -193,7 +192,7 @@ const App = () => {
                   
               } catch (err) {
                   const backendError = err.response?.data?.error || "Error saving setlist";
-                  alert(backendError);
+                  showPopUp(backendError, "error");
               }
             }}
         />

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"
 import "./Members.css";
+import { usePopUp } from "../PopUp/PopUpContext";
 
 const Members = ({ userId, role, url }) => {
+    const { showPopUp, showConfirm, showPrompt } = usePopUp();
     const [members, setMembers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -19,14 +21,20 @@ const Members = ({ userId, role, url }) => {
             setMembers(response.data);
         } catch (err) {
             const backendError = err.response?.data?.error || "Failed to fetch group members";
-            alert(backendError);
+            showPopUp(backendError, "error");
         } finally {
             setIsLoading(false);
         }
     };
 
     const handleMakeAdmin = async (memberId, memberName) => {
-        if (!window.confirm(`Are you sure you want to make ${memberName} an admin?`)) return;
+        const confirmed = await showConfirm({
+            title: "Promote to Admin",
+            message: `Are you sure you want to make ${memberName} an admin?`,
+            confirmText: "Make Admin",
+            isDanger: false,
+        });
+        if (!confirmed) return;
 
         try {
             const token = localStorage.getItem("token");
@@ -34,15 +42,21 @@ const Members = ({ userId, role, url }) => {
                 { memberId },
                 { headers: { "Authorization": `Bearer ${token}` } }
             );
-            alert(response.data.msg);
+            showPopUp(response.data.msg, "success");
             fetchMembers(); // Refresh list
         } catch (err) {
-            alert(err.response?.data?.error || "Error updating role");
+            showPopUp(err.response?.data?.error || "Error updating role", "error");
         }
     };
 
     const handleRemoveMember = async (memberId, memberName) => {
-        if (!window.confirm(`Are you sure you want to remove ${memberName} from the group?`)) return;
+        const confirmed = await showConfirm({
+            title: "Remove Member",
+            message: `Are you sure you want to remove ${memberName} from the group?`,
+            confirmText: "Remove",
+            isDanger: true,
+        });
+        if (!confirmed) return;
 
         try {
             const token = localStorage.getItem("token");
@@ -50,15 +64,21 @@ const Members = ({ userId, role, url }) => {
                 headers: { "Authorization": `Bearer ${token}` },
                 data: { memberId } 
             });
-            alert(response.data.msg);
+            showPopUp(response.data.msg, "success");
             fetchMembers(); // Refresh list
         } catch (err) {
-            alert(err.response?.data?.error || "Error removing member");
+            showPopUp(err.response?.data?.error || "Error removing member", "error");
         }
     };
 
     const handleResetPassword = async (memberId, memberName) => {
-        const newPassword = prompt(`Enter a new temporary password for ${memberName}:`);
+        const newPassword = await showPrompt({
+            title: "Reset Password",
+            message: `Enter a new temporary password for ${memberName}:`,
+            inputType: "password",
+            placeholder: "Enter temporary password",
+            confirmText: "Reset Password",
+        });
         if (!newPassword || newPassword.trim() === "") return;
 
         try {
@@ -67,9 +87,9 @@ const Members = ({ userId, role, url }) => {
                 { memberId, newPassword },
                 { headers: { "Authorization": `Bearer ${token}` } }
             );
-            alert(response.data.msg);
+            showPopUp(response.data.msg, "success");
         } catch (err) {
-            alert(err.response?.data?.error || "Error resetting password");
+            showPopUp(err.response?.data?.error || "Error resetting password", "error");
         }
     };
 
